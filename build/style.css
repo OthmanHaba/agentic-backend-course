@@ -1,0 +1,143 @@
+/* NAQLA brand print stylesheet. Paths are relative to this file (build/). */
+@font-face { font-family: "Inter"; src: url("../brand/fonts/Inter.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Playfair Display"; src: url("../brand/fonts/PlayfairDisplay.ttf"); font-weight: 400 900; }
+@font-face { font-family: "Tajawal"; src: url("../brand/fonts/Tajawal-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Tajawal"; src: url("../brand/fonts/Tajawal-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Tajawal"; src: url("../brand/fonts/Tajawal-ExtraBold.ttf"); font-weight: 800 900; }
+@font-face { font-family: "JetBrains Mono"; src: url("../brand/fonts/JetBrainsMono-Regular.ttf"); font-weight: 100 800; }
+
+:root {
+  --orange: #FF5723; --black: #272827; --warm: #E8E2D9;
+  --g1: #3A3B3A; --g2: #6B7280; --g3: #9CA3AF; --g4: #D0CBC0;
+  --body: "Inter", "Helvetica Neue", sans-serif;
+  --head: "Playfair Display", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+html[dir="rtl"] {
+  --body: "Tajawal", "Inter", sans-serif;
+  --head: "Shamel", "Tajawal", sans-serif;
+}
+
+@page {
+  size: A4; margin: 22mm 20mm 24mm;
+  @bottom-left  { font: 500 7.5pt var(--body); color: var(--g2); letter-spacing: .06em; vertical-align: top; padding-top: 6mm; }
+  @bottom-right { content: counter(page); font: 700 8pt var(--body); color: var(--orange); vertical-align: top; padding-top: 6mm; }
+}
+@page cover { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+
+* { box-sizing: border-box; }
+html { font: 400 10pt/1.6 var(--body); color: var(--black); background: #fff; }
+html[dir="rtl"] { font-size: 11pt; line-height: 1.75; }
+body { margin: 0; counter-reset: ch; }
+
+/* ---------- cover ---------- */
+.cover {
+  page: cover; position: relative; width: 210mm; height: 296mm; overflow: hidden;
+  background: var(--black); color: var(--warm); break-after: page;
+  direction: ltr; text-align: left;
+}
+html[dir="rtl"] .cover-body, html[dir="rtl"] .cover-foot { direction: rtl; text-align: right; }
+.cover-pattern {
+  position: absolute; left: 0; right: 0; bottom: 14mm; height: 120mm;
+  background: linear-gradient(to bottom, var(--black) 0%, rgba(39,40,39,.55) 45%, rgba(39,40,39,.1) 100%),
+              url("../brand/images/pattern-1.png") center 80% / cover;
+}
+.cover-logo {
+  position: absolute; top: 26mm; left: 24mm; width: 80mm; height: 26mm;
+  background: url("../brand/images/logo-full.png") -6.5mm -33.5mm / 93mm 93mm no-repeat;
+}
+.cover-body { position: absolute; top: 84mm; left: 24mm; right: 24mm; }
+.cover-type { font: 700 10pt var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--orange); margin-bottom: 8mm; }
+html[dir="rtl"] .cover-type { letter-spacing: 0; font-size: 13pt; }
+.cover-title { font: 700 40pt/1.1 var(--head); color: var(--warm); margin: 0; border: 0; padding: 0; counter-increment: none; break-before: auto; }
+.cover-title::before { content: none !important; }
+html[dir="rtl"] .cover-title { font-weight: 800; line-height: 1.35; }
+.cover-subtitle { font: 400 15pt/1.4 var(--head); color: var(--orange); margin-top: 6mm; }
+.cover-rule { width: 28mm; height: 1.2mm; background: var(--orange); margin: 10mm 0 7mm; }
+.cover-course { font: 400 10.5pt/1.6 var(--body); color: var(--g4); max-width: 130mm; }
+.cover-foot {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 5mm 24mm 7mm; background: var(--black);
+  display: flex; justify-content: space-between; gap: 6mm;
+  font: 500 7.5pt var(--body); letter-spacing: .14em; color: var(--warm);
+}
+html[dir="rtl"] .cover-foot { direction: ltr; }
+
+/* ---------- TOC ---------- */
+#TOC { break-after: page; }
+#TOC .toc-title { font: 700 26pt var(--head); margin: 0 0 8mm; padding-bottom: 4mm; border-bottom: 1.2mm solid var(--orange); }
+html[dir="rtl"] #TOC .toc-title { font-weight: 800; }
+#TOC ul { list-style: none; margin: 0; padding: 0; }
+#TOC > ul > li { margin-top: 3.2mm; font-weight: 700; counter-increment: toc; }
+#TOC > ul > li > a::before { content: counter(toc, decimal-leading-zero); color: var(--orange); font-family: var(--head); font-weight: 800; display: inline-block; width: 11mm; }
+#TOC ul ul { padding-inline-start: 11mm; }
+#TOC ul ul li { font-weight: 400; font-size: 9pt; margin-top: .8mm; color: var(--g1); }
+#TOC a { color: inherit; text-decoration: none; }
+
+/* ---------- headings ---------- */
+h1, h2, h3, h4 { font-family: var(--head); color: var(--black); line-height: 1.2; break-after: avoid; }
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] h4 { font-weight: 800; line-height: 1.4; }
+h1 { font-size: 28pt; font-weight: 700; margin: 0 0 8mm; padding-bottom: 4mm; border-bottom: 1.2mm solid var(--orange); }
+body.book main h1 { break-before: page; counter-increment: ch; padding-top: 6mm; }
+body.book main h1:not(.unnumbered)::before {
+  content: counter(ch, decimal-leading-zero); display: block;
+  font: 800 76pt/1 var(--head); color: var(--orange); margin-bottom: 3mm; direction: ltr;
+}
+html[dir="rtl"] body.book main h1:not(.unnumbered)::before { text-align: right; }
+body.book main h1:first-child { break-before: auto; }
+h2 { font-size: 18pt; font-weight: 700; margin: 9mm 0 3mm; padding-bottom: 1.5mm; border-bottom: .6mm solid var(--orange); }
+h3 { font-size: 13pt; font-weight: 700; margin: 6mm 0 2mm; padding-inline-start: 3mm; border-inline-start: 1mm solid var(--orange); }
+h4 { font-size: 11pt; margin: 4mm 0 1mm; }
+p { margin: 0 0 3mm; orphans: 3; widows: 3; }
+a { color: var(--orange); text-decoration: none; }
+ul, ol { margin: 0 0 3mm; padding-inline-start: 6mm; }
+li { margin-bottom: 1mm; }
+li::marker { color: var(--orange); }
+hr { border: 0; border-top: .3mm solid var(--g4); margin: 6mm 0; }
+blockquote { margin: 3mm 0; padding: 1mm 4mm; border-inline-start: 1mm solid var(--g4); color: var(--g1); }
+img { max-width: 100%; }
+header#title-block-header { display: none; }
+
+/* ---------- code ---------- */
+code { font-family: var(--mono); font-size: .86em; direction: ltr; unicode-bidi: isolate; }
+:not(pre) > code { background: var(--warm); padding: .2mm 1.2mm; border-radius: 1mm; color: var(--black); }
+pre, div.sourceCode {
+  direction: ltr; unicode-bidi: isolate; text-align: left;
+  background: var(--black); color: var(--warm); border-radius: 2mm; margin: 3mm 0;
+}
+div.sourceCode { padding: 0; overflow: hidden; }
+pre { padding: 3.5mm 4.5mm; font: 400 8pt/1.55 var(--mono); white-space: pre-wrap; word-break: break-word; margin: 0; }
+div.sourceCode pre { background: transparent; }
+div.sourceCode + div.sourceCode, pre + pre { margin-top: 3mm; }
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; white-space: pre-wrap; }
+pre, div.sourceCode { break-inside: avoid; }
+div.sourceCode { margin-bottom: 3mm; }
+pre.sourceCode { overflow: visible; }
+
+/* ---------- tables ---------- */
+table { border-collapse: collapse; width: 100%; margin: 4mm 0; font-size: 9pt; break-inside: auto; }
+thead th { background: var(--orange); color: #fff; font-weight: 700; padding: 2mm 3mm; text-align: start; }
+td { padding: 1.8mm 3mm; border-bottom: .25mm solid var(--g4); vertical-align: top; text-align: start; }
+tbody tr:nth-child(even) td { background: #F6F3EE; }
+tr { break-inside: avoid; }
+table code { font-size: .88em; }
+
+/* ---------- callouts ---------- */
+div.tip, div.warning, div.agent, div.checkpoint, div.instructor {
+  background: var(--warm); border-inline-start: 1.6mm solid var(--orange);
+  border-radius: 0 2mm 2mm 0; padding: 3mm 5mm 1.5mm; margin: 4mm 0; break-inside: avoid;
+}
+html[dir="rtl"] :is(div.tip, div.warning, div.agent, div.checkpoint, div.instructor) { border-radius: 2mm 0 0 2mm; }
+.callout-label p { margin: 0 0 1.5mm; font: 700 7.5pt var(--body); text-transform: uppercase; letter-spacing: .12em; color: var(--orange); }
+html[dir="rtl"] .callout-label p { letter-spacing: 0; font-size: 9.5pt; text-transform: none; }
+div.warning { background: #FFE9E1; border-inline-start-color: #C2370F; }
+div.warning .callout-label p { color: #C2370F; }
+div.agent { background: var(--black); color: var(--warm); }
+div.agent code, div.agent :not(pre) > code { background: rgba(232,226,217,.14); color: var(--warm); }
+div.agent pre { background: rgba(255,255,255,.07); }
+div.agent a { color: var(--orange); }
+div.checkpoint { background: #fff; border: .4mm solid var(--g4); border-inline-start: 1.6mm solid var(--black); }
+div.checkpoint .callout-label p { color: var(--black); }
+div.checkpoint ul { list-style: none; padding-inline-start: 1mm; }
+div.instructor { background: #fff; border: .4mm dashed var(--g3); border-inline-start: 1.6mm solid var(--g2); }
+div.instructor .callout-label p { color: var(--g2); }
+.callout-label + * { margin-top: 0; }

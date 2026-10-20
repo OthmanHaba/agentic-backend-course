@@ -1,0 +1,3 @@
+[submodule "shahna-api"]
+	path = shahna-api
+	url = https://github.com/OthmanHaba/shahna-api.git

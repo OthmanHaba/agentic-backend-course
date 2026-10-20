@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="$lang$" dir="$dir$">
+<head>
+<meta charset="utf-8">
+<title>$pagetitle$</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+$if(rtl)$
+@page { @bottom-right { content: "$footer$"; font: 500 7.5pt var(--body); color: var(--g2); letter-spacing: .06em; text-align: right; }
+        @bottom-left { content: counter(page); font: 700 8pt var(--body); color: var(--orange); text-align: left; } }
+$else$
+@page { @bottom-left { content: "$footer$"; } }
+$endif$
+$highlighting-css$
+</style>
+</head>
+<body class="$bodyclass$">
+<section class="cover">
+  <div class="cover-pattern"></div>
+  <div class="cover-logo"></div>
+  <div class="cover-body">
+    <div class="cover-type">$doc_type$</div>
+    <h1 class="cover-title">$title$</h1>
+$if(subtitle)$    <div class="cover-subtitle">$subtitle$</div>$endif$
+    <div class="cover-rule"></div>
+$if(course)$    <div class="cover-course">$course$</div>$endif$
+  </div>
+  <div class="cover-foot">
+    <div>NAQLA TRAINING CENTER · naqlaa.ly</div>
+    <div>$version$</div>
+  </div>
+</section>
+$if(toc)$
+<nav id="TOC" role="doc-toc">
+<h1 class="toc-title">$toc-title$</h1>
+$table-of-contents$
+</nav>
+$endif$
+<main>
+$body$
+</main>
+</body>
+</html>
